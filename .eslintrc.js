@@ -15,7 +15,9 @@ module.exports = {
     'react-native/no-color-literals': 0,
     'react-native/sort-styles': 0,
     'react-hooks/exhaustive-deps': 0,
+    'react/prop-types': 0,
     'multiline-ternary': 0,
     'react-native/no-raw-text': 0,
+    'no-unused-vars': 1,
   },
 }
