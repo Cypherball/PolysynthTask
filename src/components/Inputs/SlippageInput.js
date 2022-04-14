@@ -5,7 +5,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import CustomRadioButton from '../radio/CustomRadioButton'
+import CustomRadioButton from '../radio/CustomRadioButton.js'
 
 function SlippageInput(props) {
   const hasError = parseFloat(props.value) > 5.0

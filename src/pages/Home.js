@@ -8,12 +8,11 @@ import {
 } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
 
-import AmountInput from '../components/inputs/AmountInput'
-import SlippageInput from '../components/inputs/SlippageInput'
-import LeverageSlider from '../components/sliders/LeverageSlider'
-
-import { generateUniqueInt, sleep } from '../utils'
-import OrderHistoryTable from '../components/tables/OrderHistoryTable'
+import AmountInput from '../components/inputs/AmountInput.js'
+import SlippageInput from '../components/inputs/SlippageInput.js'
+import LeverageSlider from '../components/sliders/LeverageSlider.js'
+import OrderHistoryTable from '../components/tables/OrderHistoryTable.js'
+import { generateUniqueInt, sleep } from '../utils/index.js'
 
 const INPUT_ID_USDP = 'input-amount-USDP'
 const INPUT_ID_ETH = 'input-amount-eth'
