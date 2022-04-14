@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Slider, Typography } from '@mui/material'
 
 const minVal = 1
@@ -17,9 +17,7 @@ function LeverageSlider(props) {
         <Typography color={'text.secondary'} variant="body1">
           Leverage
         </Typography>
-        <Typography
-          color={'text.secondary'}
-          variant="body1">{`${props.value}x`}</Typography>
+        <Typography variant="body1">{`${props.value}x`}</Typography>
       </div>
       <Slider
         aria-label="Leverage"
@@ -47,4 +45,4 @@ function LeverageSlider(props) {
   )
 }
 
-export default LeverageSlider
+export default memo(LeverageSlider)

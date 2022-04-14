@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Button, Radio } from '@mui/material'
 
 function CustomRadioButton(props) {
@@ -26,4 +26,4 @@ function CustomRadioButton(props) {
   )
 }
 
-export default CustomRadioButton
+export default memo(CustomRadioButton)

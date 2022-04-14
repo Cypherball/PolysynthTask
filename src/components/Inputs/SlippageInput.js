@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
   InputAdornment,
   RadioGroup,
@@ -8,6 +8,8 @@ import {
 import CustomRadioButton from '../radio/CustomRadioButton'
 
 function SlippageInput(props) {
+  const hasError = parseFloat(props.value) > 5.0
+
   return (
     <div>
       <div
@@ -19,9 +21,7 @@ function SlippageInput(props) {
         <Typography color={'text.secondary'} variant="body1">
           Slipppage Tolerance
         </Typography>
-        <Typography
-          color={'text.secondary'}
-          variant="body1">{`${props.value}%`}</Typography>
+        <Typography variant="body1">{`${props.value}%`}</Typography>
       </div>
       <div
         style={{
@@ -39,9 +39,17 @@ function SlippageInput(props) {
               display: 'flex',
               flexDirection: 'row',
             }}>
-            <CustomRadioButton value={0.1} label="0.1%" />
-            <CustomRadioButton value={0.5} label="0.5%" />
-            <CustomRadioButton value={1} label="1%" />
+            <CustomRadioButton
+              disabled={props.disabled}
+              value={0.1}
+              label="0.1%"
+            />
+            <CustomRadioButton
+              disabled={props.disabled}
+              value={0.5}
+              label="0.5%"
+            />
+            <CustomRadioButton disabled={props.disabled} value={1} label="1%" />
           </div>
         </RadioGroup>
         <TextField
@@ -51,6 +59,7 @@ function SlippageInput(props) {
           color="primary"
           focused
           value={props.value}
+          disabled={props.disabled}
           onChange={e => {
             // whitespace not allowed
             if (!e.target.value.trim()) props.onChange(e.target.value.trim())
@@ -59,7 +68,6 @@ function SlippageInput(props) {
               props.onChange(e.target.value)
             }
           }}
-          //focused
           size="small"
           fullWidth
           sx={{
@@ -70,10 +78,18 @@ function SlippageInput(props) {
           InputProps={{
             endAdornment: <InputAdornment position="end">{'%'}</InputAdornment>,
           }}
+          // error feedbacks
+          error={hasError}
+          helperText={hasError ? 'Slippage must be 5.0% or less' : null}
         />
       </div>
     </div>
   )
 }
 
-export default SlippageInput
+SlippageInput.defaultProps = {
+  disabled: false,
+  value: '',
+}
+
+export default memo(SlippageInput)

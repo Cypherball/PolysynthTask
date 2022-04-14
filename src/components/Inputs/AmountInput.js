@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { InputAdornment, TextField } from '@mui/material'
 
 function AmountInput(props) {
@@ -7,7 +7,6 @@ function AmountInput(props) {
       variant="standard"
       label="Amount"
       autoComplete="off"
-      type={'number'}
       fullWidth
       InputProps={
         !!props.amountType && {
@@ -31,4 +30,4 @@ AmountInput.defaultProps = {
   amountType: '',
 }
 
-export default AmountInput
+export default memo(AmountInput)

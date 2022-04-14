@@ -1,6 +1,6 @@
+import React from 'react'
 import { createTheme, ThemeProvider } from '@mui/material'
 import { blue, lightGreen } from '@mui/material/colors'
-import React from 'react'
 import Home from './pages/Home'
 
 const theme = createTheme({
