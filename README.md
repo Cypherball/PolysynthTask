@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# _Polysynth_ Interview React App Task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a react app built as a task for an interview at [Polysynth](https://polysynth.com/)
 
-## Available Scripts
+**Framework:** React
 
-In the project directory, you can run:
+**Version:** 18.0.0
 
-### `npm start`
+## Live App
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+[Check it out here](https://polysynth-task.netlify.app)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation Steps
 
-### `npm test`
+Follow the below steps in order to run the app:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone this repo using Sourcetree or using git.
 
-### `npm run build`
+2. `yarn install` to install node packages
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. `yarn start` to run a development server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. `yarn build` to build a production version of the React site
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Preview
 
-### `npm run eject`
+![Home Screen SS](./src/assets/screenshots/home-screenshot.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Details
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- UI Library Used: [React Material UI (MUI)](https://mui.com/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Home Screen**:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  1. Contains two text fields to input Amount in USDP and Amount in ETH. Only numbers are allowed to be input.
+  2. Inputting USDP will auto calculate ETH amount, and similarly, inputting ETH will auto calculate USDP.
+  3. Leverage can be adjusted using a slider with a range of 1 to 10. Adjusting leverage will auto calculate USDP or ETH, depending on what the user had last inputted.
+  4. Slippage Tolerance can be selected using 3 radio buttons with values 0.1%, 0.5%, and 1%. Fine grain control of slipapge can be achieved by inputting the desired value in the text field next to the radio buttons. The input range is only valid from 0-5 for the text field.
+  5. You can place the order once all required inputs are filled using the 'Place Market Order' button. A new order will be created using the inputs and a delay of 2sec will be added before adding the order to the order history. During the 2sec, all inputs would be disabled. Once the order placement mock is complete, a success message toast would be shown.
+  6. All orders will be persisted and stored in local storage. This means any order you place will still be visible on page refresh. These orders are displayed in the table below the Order Placement Form. A 'Clear History' button is present below the table if you so wish to remove the orders from persisted local storage.
