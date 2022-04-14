@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Container, CssBaseline, Typography } from '@mui/material'
+import {
+  Alert,
+  Container,
+  CssBaseline,
+  Snackbar,
+  Typography,
+} from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 import AmountInput from '../components/inputs/AmountInput'
@@ -14,8 +20,15 @@ const INPUT_ID_ETH = 'input-amount-eth'
 
 const ORDER_HISTORY_LOCAL_STORAGE_ID = 'OrderHistory'
 
+const DEFAULT_TOAST_CONFIG = {
+  visible: false,
+  severity: 'info',
+  message: 'Default Message',
+}
+
 function Home() {
   const [loading, setLoading] = useState(false)
+  const [toastConfig, setToastConfig] = useState(DEFAULT_TOAST_CONFIG)
 
   const [amountUSDP, setAmountUSDP] = useState('')
   const [amountETH, setAmountETH] = useState('')
@@ -78,30 +91,50 @@ function Home() {
 
   const placeOrder = async () => {
     setLoading(true)
-    await sleep(2000)
-    // create an order object
-    const newOrder = [
-      {
-        id: generateUniqueInt(),
-        usdp: amountUSDP,
-        eth: amountETH,
-        leverage,
-        slippage,
-        placedAt: new Date().getTime(),
-      },
-    ]
-    // set order history
-    setOrderHistory(_orders => {
-      const orders = [...newOrder, ..._orders]
-      console.log(orders, 'orders')
-      // persist order history
-      localStorage.setItem(
-        ORDER_HISTORY_LOCAL_STORAGE_ID,
-        JSON.stringify(orders),
-      )
-      return orders
-    })
-    setLoading(false)
+    try {
+      // create an order object
+      const newOrder = [
+        {
+          id: generateUniqueInt(),
+          usdp: amountUSDP,
+          eth: amountETH,
+          leverage,
+          slippage,
+          placedAt: new Date().getTime(),
+        },
+      ]
+      // mock loading state for 2s as if performing an API call
+      await sleep(2000)
+      // set order history
+      setOrderHistory(_orders => {
+        const orders = [...newOrder, ..._orders]
+        // serialize and persist order history
+        localStorage.setItem(
+          ORDER_HISTORY_LOCAL_STORAGE_ID,
+          JSON.stringify(orders),
+        )
+        return orders
+      })
+      //clear inputs
+      setAmountETH('')
+      setAmountUSDP('')
+      // show success
+      setToastConfig({
+        visible: true,
+        severity: 'success',
+        message: `Successfully placed an order!`,
+      })
+    } catch (err) {
+      console.error(err, 'placeOrder')
+      // show success
+      setToastConfig({
+        visible: true,
+        severity: 'error',
+        message: `Oops, there was an error placing your order`,
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -209,6 +242,17 @@ function Home() {
               />
             </div>
           </Container>
+          <Snackbar
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            open={toastConfig.visible}
+            onClose={() => {
+              setToastConfig(config => ({ ...config, visible: false }))
+            }}
+            autoHideDuration={3000}>
+            <Alert severity={toastConfig.severity} sx={{ width: '100%' }}>
+              {toastConfig.message}
+            </Alert>
+          </Snackbar>
         </Container>
       </Container>
     </>
